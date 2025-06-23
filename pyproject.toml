@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glimmer-st"
+version = "0.1.0"
+description = "A Unified Framework for Graph-Based Representation of Spatial Structures Across Modalities and Scales"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GPL-3.0-only" }
+authors = [
+    { name = "Qiyu Gong", email = "gongqiyu@broadinstitute.org" }
+]
+dependencies = [
+    "numpy==2.2.6",
+    "pandas>=1.5.0",
+    "scipy==1.15.3",
+    "torch==2.7.0",
+    "tqdm==4.67.1",
+    "scikit-learn==1.5.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/thechenlab/Glimmer"
