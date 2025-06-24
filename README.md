@@ -8,7 +8,6 @@ Glimmer-ST is a Python package designed to construct and learn spatial graphs fr
 
 ## ✨ Features
 
-- Construct spatial graphs using KNN or radius-based methods  
 - Learn neighbor weights via Dirichlet energy minimization  
 - Fully compatible with `AnnData` and `Scanpy` workflows  
 - Scales to millions of cells using multiprocessing  
@@ -47,7 +46,7 @@ weights = adata.obsp['neighbor_weights']
 ```
 
 ## 📚 Tutorial
-xxxxxxxxxxxx
+The detailed tutorial can be found [here](https://thechenlab.github.io/Glimmer/).
 
 📫 Contact
 Qiyu Gong
