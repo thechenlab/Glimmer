@@ -1,28 +1,173 @@
 import math
-import xml.etree.ElementTree as ET
-import multiprocessing as mp
+import zarr
+import anndata as ad
 import numpy as np
 import pandas as pd
-from scipy.spatial import cKDTree, ConvexHull, Voronoi
-from scipy.spatial import KDTree
-import zarr
+from tqdm import tqdm
+import multiprocessing as mp
+import matplotlib.pyplot as plt
+from typing import Optional
+from anndata import AnnData
+import xml.etree.ElementTree as ET
+from scipy.spatial import cKDTree, ConvexHull, Voronoi, KDTree
 from zarr import open as open_zarr
-from tifffile import TiffFile
 from shapely.geometry import Point, Polygon, MultiPolygon, box
 from shapely import wkb
 from alphashape import alphashape
 from joblib import Parallel, delayed
-from tqdm import tqdm
-import matplotlib.pyplot as plt
 from matplotlib.colors import Colormap
-from typing import Optional
+from typing import Tuple
+from scipy.sparse import coo_matrix
 
+
+### Bin spatial points spatially and compute gene expression per bin (For image-based data)
+def bin_spatial_points(
+    data: pd.DataFrame,
+    n_points: int = 100,
+    min_transcripts: int = 5,
+    bin_size: int = 1,
+    step_size: int = 1,
+    x: str = "x_location",
+    y: str = "y_location",
+    gene: str = "feature_name",
+    transcript_id: str = "transcript_id",
+    seed: int = 42,
+    return_pixel: bool = True,
+    plot: bool = False
+) -> pd.DataFrame:
+    """Spatially bin transcriptomic data and aggregate gene expression per bin.
+
+    This function estimates an appropriate bin size by sampling random points and 
+    expanding bins until the minimum required transcript count is achieved. It then 
+    bins all transcripts, aggregates gene expression, and optionally returns visuals.
+
+    Args:
+        data (pd.DataFrame): 
+            Input DataFrame containing spatial coordinates (x, y), `gene`, and `transcript_id`.
+        n_points (int, optional): 
+            Number of random points sampled to estimate bin size. Defaults to 100.
+        min_transcripts (int, optional): 
+            Minimum number of transcripts required per bin. Defaults to 5.
+        bin_size (int, optional): 
+            Starting bin size (square width). Defaults to 1.
+        step_size (int, optional): 
+            Step size to increment bin if transcript count is insufficient. Defaults to 1.
+        x (str, optional): 
+            Column name for x-coordinate. Defaults to "x_location".
+        y (str, optional): 
+            Column name for y-coordinate. Defaults to "y_location".
+        gene (str, optional): 
+            Column name representing gene names. Defaults to "feature_name".
+        transcript_id (str, optional): 
+            Column name representing unique transcript identifiers. Defaults to "transcript_id".
+        seed (int, optional): 
+            Random seed used in sampling for reproducibility. Defaults to 42.
+        return_pixel (bool, optional): 
+            Whether to return the original data with bin assignments. Defaults to True.
+        plot (bool, optional): 
+            Whether to display a histogram of transcripts per bin. Defaults to False.
+
+    Returns:
+        pd.DataFrame: 
+            Gene expression matrix aggregated by bin.
+        pd.DataFrame: 
+            Bin center coordinates for visualization or downstream analysis.
+        pd.DataFrame (optional): 
+            Original input DataFrame with additional bin assignment columns 
+            (only returned if `return_pixel=True`).
+
+    Raises:
+        ValueError: If no valid bin size is found satisfying `min_transcripts`.
+    """
+    # Sample n_points from the data
+    sampled_points = data.sample(n=n_points, random_state=seed)
+
+    # Calculate bin sizes for the sampled points
+    bin_sizes = []
+    for _, row in sampled_points.iterrows():
+        current_bin_size = bin_size  # Initialize bin size
+        while True:
+            # Define the square boundaries for the current bin
+            x_all_max, x_all_min = data[x].max(), data[x].min()
+            y_all_max, y_all_min = data[y].max(), data[y].min()
+            x_min = np.clip(row[x] - current_bin_size / 2, x_all_min, x_all_max)
+            x_max = np.clip(row[x] + current_bin_size / 2, x_all_min, x_all_max)
+            y_min = np.clip(row[y] - current_bin_size / 2, y_all_min, y_all_max)
+            y_max = np.clip(row[y] + current_bin_size / 2, y_all_min, y_all_max)
+
+            # Count the number of transcripts within the square
+            count = data[(data[x] >= x_min) & (data[x] <= x_max) &
+                         (data[y] >= y_min) & (data[y] <= y_max)].shape[0]
+
+            # If count is sufficient, save bin size
+            if count >= min_transcripts:
+                bin_sizes.append(current_bin_size)
+                break
+
+            # Otherwise increase bin size
+            current_bin_size += step_size
+
+    # Ensure bin_sizes is not empty
+    if not bin_sizes:
+        raise ValueError("No valid bin sizes found. Adjust the parameters.")
+
+    # Compute the mean bin size
+    final_bin_size = np.mean(bin_sizes)
+    print(f"Averaged bin size: {final_bin_size:.2f}")
+
+    # Assign bins to the data
+    bins_x = np.arange(data[x].min(), data[x].max() + final_bin_size + 1e-6, final_bin_size)
+    bins_y = np.arange(data[y].min(), data[y].max() + final_bin_size + 1e-6, final_bin_size)
+
+    data = data.copy()
+    data["bin_x"] = np.digitize(data[x], bins_x).astype(int)
+    data["bin_y"] = np.digitize(data[y], bins_y).astype(int)
+    data["bin"] = data["bin_x"].astype(str) + "-" + data["bin_y"].astype(str)
+
+    # Group by bin and compute binned features
+    binned_data = data.groupby(["bin_x", "bin_y"]).agg(
+        center_x=(x, "mean"), 
+        center_y=(y, "mean"),  
+        num_transcripts=(transcript_id, "count"),  
+        gene_expression=(gene, lambda x: dict(x.value_counts()))  
+    ).reset_index()
+
+    # Create consistent bin ID
+    binned_data["bin_x"] = binned_data["bin_x"].astype(int)
+    binned_data["bin_y"] = binned_data["bin_y"].astype(int)
+    binned_data["bin"] = binned_data["bin_x"].astype(str) + "-" + binned_data["bin_y"].astype(str)
+
+    # Create expression matrix
+    binned_data = binned_data.set_index("bin")
+    binned_expression = pd.DataFrame(binned_data["gene_expression"].tolist()).fillna(0).astype(int)
+    binned_expression.index = binned_data.index
+    binned_coordinates = binned_data[["center_x", "center_y"]]
+
+    # Plot histogram if needed
+    if plot:
+        _, ax = plt.subplots(1, 1, figsize=(8, 6))
+        ax.hist(binned_expression.sum(axis=1), bins=50, color="skyblue", edgecolor="black")
+        ax.set_title("Histogram of Binned Expression", fontsize=14)
+        ax.set_xlabel("Total Transcripts per Bin", fontsize=12)
+        ax.set_ylabel("Number of Bins", fontsize=12)
+        ax.grid(alpha=0.3)
+        plt.tight_layout()
+        plt.show()
+
+    # Return results
+    if return_pixel:
+        return binned_expression, binned_coordinates, data
+    else:
+        return binned_expression, binned_coordinates
 
 
 # ------------------------------------------------------------------------------------------------
+### Get pixel size from Xenium 
 # When using DAPI image to segment nuclei, we need to get the pixel size from the OME-XML file
-# ------------------------------------------------------------------------------------------------
 def get_pixel_size_from_ome(xml_string):
+    """
+    Extract pixel size from OME-XML string.
+    """
     root = ET.fromstring(xml_string)
     ns = {'ome': 'http://www.openmicroscopy.org/Schemas/OME/2016-06'}
     pixels = root.find('.//ome:Pixels', namespaces=ns)
@@ -31,14 +176,14 @@ def get_pixel_size_from_ome(xml_string):
     return px_size_x, px_size_y
 
 def open_zarr(path):
+    """
+    Open a zarr store from a path.
+    """
     store = zarr.ZipStore(path, mode='r') if path.endswith(".zip") else zarr.DirectoryStore(path)
     return zarr.group(store=store)
 
 
-
-# ------------------------------------------------------------------------------------------------
-# assign nucleus ids from DAPI image to transcripts
-# ------------------------------------------------------------------------------------------------
+### assign nucleus ids from DAPI image to transcripts
 def assign_nucleus_ids_to_transcripts(
         transcripts_path: str, 
         cells_path: str, 
@@ -46,28 +191,27 @@ def assign_nucleus_ids_to_transcripts(
         pixel_size_x_um: float = 0.2125, 
         pixel_size_y_um: float = 0.2125
 ) -> pd.DataFrame:
+    """Assigns nucleus IDs to transcripts using a segmentation mask and spatial coordinates.
+
+    This function reads transcript positions and a cell segmentation mask, maps each 
+    transcript to its corresponding nucleus (if any), and saves the updated DataFrame.
+
+    Args:
+        transcripts_path (str): 
+            Path to the `transcripts.csv.gz` file containing transcript spatial coordinates.
+        cells_path (str): 
+            Path to the `cells.zarr.zip` file containing labeled nucleus segmentation mask.
+        trans_df_save_file (str): 
+            File path to save the updated transcript DataFrame with assigned nucleus IDs.
+        pixel_size_x_um (float, optional): 
+            Microns per pixel in the x-direction. Defaults to 0.2125.
+        pixel_size_y_um (float, optional): 
+            Microns per pixel in the y-direction. Defaults to 0.2125.
+
+    Returns:
+        pd.DataFrame: 
+            A DataFrame of transcripts including assigned nucleus IDs.
     """
-    Assign nucleus IDs to each transcript based on spatial coordinates and a segmentation mask.
-
-    Parameters
-    ----------
-    transcripts_path : str
-        Path to the `transcripts.csv.gz` file.
-    cells_path : str
-        Path to the `cells.zarr.zip` file.
-    trans_df_save_file : str
-        File path to save the updated transcript dataframe.
-    pixel_size_x_um : float
-        Microns per pixel in x-direction (default 0.2125).
-    pixel_size_y_um : float
-        Microns per pixel in y-direction (default 0.2125).
-
-    Returns
-    -------
-    pd.DataFrame
-        Transcript dataframe with nucleus IDs.
-    """
-
     # Load transcript data and nucleus segmentation mask
     trans_df = pd.read_csv(transcripts_path)
     nuc_root = open_zarr(cells_path)
@@ -95,10 +239,8 @@ def assign_nucleus_ids_to_transcripts(
     print(f"Saved transcript dataframe with nucleus IDs to {trans_df_save_file}")
 
 
-
 # ------------------------------------------------------------------------------------------------
-# Assign cells by Voronoi diagram
-# ------------------------------------------------------------------------------------------------
+### Assign cells by Voronoi diagram
 def process_nucleus_wrapper(args):
     """
     Build a convex hull polygon for a given nucleus ID if it has enough points.
@@ -180,40 +322,47 @@ def assign_cell_by_voronoi(
         y: str = "y_location",
         nucleus_label: str = "nucleus_id",
         cluster_label: str = "cluster_0.45",
+        output_col: str = "updated_cell_id",
         n_workers: int = None,
         max_distance: float = None,
+        dist_factor: float = 2.0,
         batch_size: int = 1000,
         verbose: bool = True
 ) -> pd.DataFrame:
+    """Assigns transcript points to cells using Voronoi tessellation based on nucleus centroids.
+
+    This function constructs Voronoi regions from nucleus centroids, optionally segmented 
+    by cluster, and assigns each transcript to the nearest region. It supports parallel 
+    processing and allows distance thresholding to restrict assignments.
+
+    Args:
+        df (pd.DataFrame): 
+            Input DataFrame containing spatial transcript coordinates and nucleus assignments.
+        x (str, optional): 
+            Column name for x-coordinate. Defaults to "x_location".
+        y (str, optional): 
+            Column name for y-coordinate. Defaults to "y_location".
+        nucleus_label (str, optional): 
+            Column name for nucleus IDs (used as Voronoi seeds). Defaults to "nucleus_id".
+        cluster_label (str, optional): 
+            Column name for cluster/subtype labels to split Voronoi computation. Defaults to "cluster_0.45".
+        n_workers (int or None, optional): 
+            Number of parallel workers to use. If None, up to 16 cores are used. Defaults to None.
+        max_distance (float or None, optional): 
+            Maximum distance allowed from a centroid to assign a point. If None, will be estimated. Defaults to None.
+        dist_factor (float, optional): 
+            Factor to multiply the estimated max distance. Defaults to 2.0.
+        batch_size (int, optional): 
+            Number of unassigned points to process per batch. Defaults to 1000.
+        verbose (bool, optional): 
+            Whether to print progress messages during assignment. Defaults to True.
+
+    Returns:
+        pd.DataFrame: 
+            Modified DataFrame with two new columns:
+            - 'voronoi_assigned': Boolean indicating if a point was successfully assigned.
+            - 'updated_cell_id': ID of the assigned cell after Voronoi segmentation.
     """
-    Assign transcript points to cells using Voronoi regions built from nucleus centroids,
-    while optionally splitting based on clustering labels.
-
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input dataframe with spatial point coordinates and nucleus ID assignment.
-    x, y : str
-        Column names for spatial coordinates.
-    nucleus_label : str
-        Column name for nucleus assignment.
-    cluster_label : str
-        Column name for clustering used to distinguish cell subgroups.
-    n_workers : int or None
-        Number of parallel workers to use. Default uses up to 16 cores.
-    max_distance : float or None
-        Maximum allowed distance from centroid to assign a point. If None, it is estimated.
-    batch_size : int
-        Number of unassigned points to process per batch.
-    verbose : bool
-        Whether to print progress messages.
-
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with 'voronoi_assigned' and 'updated_cell_id' columns added.
-    """
-
     if n_workers is None:
         n_workers = min(mp.cpu_count(), 16)
 
@@ -249,7 +398,7 @@ def assign_cell_by_voronoi(
     # Estimate max assignment distance if not given
     if max_distance is None:
         areas = [wkb.loads(poly_wkb).area for poly_wkb in polygons_wkb.values()]
-        max_distance = 2 * np.sqrt(np.median(areas) / np.pi)
+        max_distance = dist_factor * np.sqrt(np.median(areas) / np.pi)
         if verbose:
             print(f"Using auto-calculated max_distance: {max_distance:.2f}")
 
@@ -312,27 +461,27 @@ def assign_cell_by_voronoi(
         lambda x: f"Cell-{int(x)}" if pd.notnull(x) else x
     )
 
-    groups = [(name, group) for name, group in df.groupby(['voronoi_assigned', cluster_label])]
+    # groups = [(name, group) for name, group in df.groupby(['voronoi_assigned', cluster_label])]
+    groups = [(name, group) for name, group in df.groupby(['voronoi_assigned', cluster_label], observed=True)]
 
     with mp.Pool(n_workers) as pool:
         id_series = pool.map(process_group, groups)
 
-    df['updated_cell_id'] = pd.concat(id_series)
+    df[output_col] = pd.concat(id_series)
 
     # Step 4: Filter spatially abnormal cells (too isolated)
     if verbose:
         print("Filtering abnormal cells...")
 
     if len(df) > 0:
-        cell_stats = df.groupby('updated_cell_id')[[x, y]].agg(['count', 'mean'])
+        cell_stats = df.groupby(output_col)[[x, y]].agg(['count', 'mean'])
         if len(cell_stats) > 1:
             kdtree = cKDTree(cell_stats[[(x, 'mean'), (y, 'mean')]].values)
             distances, _ = kdtree.query(cell_stats[[(x, 'mean'), (y, 'mean')]].values, k=2)
             neighbor_dists = distances[:, 1]
-
             median_dist = np.median(neighbor_dists)
             valid_cells = cell_stats[neighbor_dists < 3 * median_dist].index
-            df = df[df['updated_cell_id'].isin(valid_cells)]
+            df = df[df[output_col].isin(valid_cells)]
 
     if verbose:
         print("Assignment completed.")
@@ -340,52 +489,51 @@ def assign_cell_by_voronoi(
     return df
 
 
-
-# ------------------------------------------------------------------------------------------------
-# Merge small cells
-# ------------------------------------------------------------------------------------------------
+# # Merge small cells that were over-segmented due to bin label constraints
 def merge_small_cells(
     df: pd.DataFrame,
     x: str = 'x_location',
     y: str = 'y_location',
-    cluster: str = 'cluster_0.45',
+    cluster: str = 'cluster_col_by_bin_labels',
     cell_id: str = 'updated_cell_id',
     output: str = 'updated_cell_id_merged',
-    min_UMI: int = 5,
+    min_UMI: int = 3,
     filter: bool = True,
-    k_neighbors: int = 3,
+    k_neighbors: int = 1,
     verbose: bool = True
 ) -> pd.DataFrame:
-    """
-    Merge small spatial transcriptomic cells (based on UMI counts) into nearby larger cells within the same cluster.
+    """Merges small transcriptomic cells into neighboring larger ones within the same cluster.
 
-    Parameters
-    ----------
-    df : pd.DataFrame
-        Input DataFrame with transcript-level spatial data and cell assignments.
-    x : str, default='x_location'
-        Column name for x-coordinates.
-    y : str, default='y_location'
-        Column name for y-coordinates.
-    cluster : str, default='cluster_0.45'
-        Column indicating the cluster assignment of each cell.
-    cell_id : str, default='updated_cell_id'
-        Column indicating current cell ID of each transcript.
-    output : str, default='updated_cell_id_merged'
-        Name of the output column for updated cell IDs after merging.
-    min_UMI : int, default=5
-        Minimum UMI count threshold for a cell to avoid being considered "small".
-    filter : bool, default=True
-        Whether to filter out small cells that could not be merged.
-    k_neighbors : int, default=3
-        Number of nearest neighbors to search when finding merge targets for small cells.
-    verbose : bool, default=True
-        Whether to print information during the merging process.
+    Cells with total transcript (UMI) counts below a specified threshold are considered 
+    "small" and are merged into the nearest neighbor cell (within the same cluster) 
+    based on spatial coordinates.
 
-    Returns
-    -------
-    pd.DataFrame
-        DataFrame with an additional column indicating merged cell IDs. Optionally filtered to exclude unmerged small cells.
+    Args:
+        df (pd.DataFrame): 
+            Input DataFrame containing transcript-level spatial data and cell assignments.
+        x (str, optional): 
+            Column name for x-coordinates. Defaults to 'x_location'.
+        y (str, optional): 
+            Column name for y-coordinates. Defaults to 'y_location'.
+        cluster (str, optional): 
+            Column name indicating cluster labels to constrain merging within clusters. Defaults to 'cluster_0.45'.
+        cell_id (str, optional): 
+            Column name for current cell ID assignments. Defaults to 'updated_cell_id'.
+        output (str, optional): 
+            Column name for storing the merged cell IDs. Defaults to 'updated_cell_id_merged'.
+        min_UMI (int, optional): 
+            Minimum number of UMIs required for a cell to be retained as-is. Defaults to 3.
+        filter (bool, optional): 
+            If True, removes small cells that cannot be merged. Defaults to True.
+        k_neighbors (int, optional): 
+            Number of nearest neighbors to consider for merging targets. Defaults to 1.
+        verbose (bool, optional): 
+            If True, prints status and statistics during merging. Defaults to True.
+
+    Returns:
+        pd.DataFrame: 
+            Modified DataFrame with an additional column containing merged cell IDs. 
+            If `filter=True`, small unmerged cells are removed.
     """
     df = df.reset_index(drop=True).copy()
 
@@ -442,10 +590,86 @@ def merge_small_cells(
     return df
 
 
+# Detect abnormal cells based on irregular shape or unusual transcript density  
+def abnormal_cell_detection(
+    df,
+    cell_col="cell_id",
+    gene_col="feature_name",
+    x="x_location",
+    y="y_location",
+    polarity_thresh=0.6,
+    density_thresh=0.75,
+    umi_quantile=0.8,
+    min_UMIs=5
+):
+    """
+    Detect abnormal cells based on spatial shape irregularity and transcript density dispersion.
 
-# ------------------------------------------------------------------------------------------------
-# Remove overlapping cells
-# ------------------------------------------------------------------------------------------------
+    This function identifies potentially abnormal or fragmented cells from spatial point data 
+    (e.g., transcripts, spots, or molecules) by computing:
+      - Shape polarity: a measure of elongation based on the covariance matrix of coordinates.
+      - Density dispersion: standard deviation of distances from cell centroid.
+    
+    Cells with high elongation (high polarity) and high dispersion, or very low UMI counts, 
+    are flagged as abnormal.
+
+    Args:
+        df (pd.DataFrame): Input data containing spatial coordinates and feature annotations.
+        cell_col (str): Column name indicating cell/group identity (e.g., 'cell_id').
+        gene_col (str): Column representing individual features (e.g., gene names or molecule IDs).
+        x (str): Column name for x-coordinate.
+        y (str): Column name for y-coordinate.
+        polarity_thresh (float): Threshold for shape polarity to flag abnormality.
+        density_thresh (float): Threshold for dispersion (std of radial distances) to flag abnormality.
+        umi_quantile (float): Quantile threshold for filtering out cells with unusually high UMI counts.
+        min_UMIs (int): Minimum number of UMIs required to consider polarity/density calculations valid.
+
+    Returns:
+        pd.DataFrame: A table with one row per cell, including:
+            - polarity: elongation score of the cell's shape.
+            - density_std: standard deviation of distance to centroid.
+            - abnormal: binary flag (1 = abnormal, 0 = normal).
+    """
+
+    df = df.copy()
+    df["UMI_counts"] = df.groupby(cell_col)[gene_col].transform("count")
+    df_filtered = df[df["UMI_counts"] < df["UMI_counts"].quantile(umi_quantile)]
+
+    polarity_dict = {}
+    std_dict = {}
+    abnormal_dict = {}
+
+    for cell_id, group in df_filtered.groupby(cell_col):
+        coords = group[[x, y]].values
+
+        if len(coords) <= min_UMIs: 
+            polarity_dict[cell_id] = np.nan
+            std_dict[cell_id] = np.nan
+            abnormal_dict[cell_id] = 1 
+            continue
+
+        centered = coords - coords.mean(axis=0)
+        cov = np.cov(centered.T)
+        eigvals = np.linalg.eigvalsh(cov)[::-1]
+        polarity = np.sqrt(1 - eigvals[1] / eigvals[0]) if eigvals[0] > 0 else 0
+        std_radius = np.std(np.linalg.norm(coords - coords.mean(axis=0), axis=1))
+
+        polarity_dict[cell_id] = polarity
+        std_dict[cell_id] = std_radius
+
+        is_abnormal = ((polarity > polarity_thresh) and (std_radius > density_thresh)) or np.isnan(polarity)
+        abnormal_dict[cell_id] = int(is_abnormal)
+
+    # Merge results
+    all_cells = pd.DataFrame(df[cell_col].drop_duplicates(), columns=[cell_col])
+    all_cells["polarity"] = all_cells[cell_col].map(polarity_dict)
+    all_cells["density_std"] = all_cells[cell_col].map(std_dict)
+    all_cells["abnormal"] = all_cells[cell_col].map(abnormal_dict).fillna(0).astype(int)
+
+    return all_cells
+
+
+# Remove overlapping cells with conflicting labels at shared spatial locations
 def remove_overlapping_cells(
     df, 
     cell_label="updated_cell_id", 
@@ -458,23 +682,38 @@ def remove_overlapping_cells(
     n_jobs=4,
     verbose=True
 ):
-    """
-    Remove small cells that are mostly contained within larger cells.
-    
-    Parameters:
-        df (pd.DataFrame): Input dataframe containing cell coordinates and labels
-        cell_label (str): Column name for cell identifiers
-        x (str): Column name for x-coordinates
-        y (str): Column name for y-coordinates
-        alpha_val (float): Alpha parameter for alphashape polygon generation
-        area_percentile (float): Percentile threshold to define small vs large cells
-        containment_threshold (float): Minimum overlap ratio to consider a small cell contained
-        max_candidates (int): Maximum nearby large cells to check for overlap
-        n_jobs (int): Number of parallel jobs to run
-        verbose (bool): Whether to print progress information
-    
+    """Removes small cells that are mostly contained within larger cells.
+
+    This function identifies spatially small cells based on area percentile and removes 
+    them if they are largely enclosed by neighboring larger cells, using alpha shapes 
+    for cell boundary estimation.
+
+    Args:
+        df (pd.DataFrame): 
+            Input DataFrame containing spatial coordinates and cell labels.
+        cell_label (str, optional): 
+            Column name for cell identifiers. Defaults to "updated_cell_id".
+        x (str, optional): 
+            Column name for x-coordinates. Defaults to "x_location".
+        y (str, optional): 
+            Column name for y-coordinates. Defaults to "y_location".
+        alpha_val (float, optional): 
+            Alpha parameter used in alpha shape generation for cell boundary. Defaults to 0.1.
+        area_percentile (float, optional): 
+            Percentile threshold to distinguish small cells. Defaults to 5.
+        containment_threshold (float, optional): 
+            Minimum fractional overlap required to mark a small cell as contained. Defaults to 0.95.
+        max_candidates (int, optional): 
+            Maximum number of nearby large cells to check for containment. Defaults to 5.
+        n_jobs (int, optional): 
+            Number of parallel jobs to use for processing. Defaults to 4.
+        verbose (bool, optional): 
+            If True, prints progress information. Defaults to True.
+
     Returns:
-        pd.DataFrame: Original dataframe with added 'keep' column (False for cells to remove)
+        pd.DataFrame: 
+            Original DataFrame with an additional column `'keep'`, where `False` indicates 
+            cells that are considered overlapping and can be removed.
     """
     if verbose:
         print("[INFO] Building cell polygons...")
@@ -564,17 +803,92 @@ def remove_overlapping_cells(
     return final_df
 
 
+# Build cell-by-gene expression matrix and cell centroid matrix after transcript labeling and cell ID assignment
+def build_cell_matrices(
+    df: pd.DataFrame, 
+    gene_col: str = 'gene', 
+    cell_col: str = 'cell_id', 
+    cluster_col: str = 'cluster',
+    x_col: str = 'x', 
+    y_col: str = 'y'
+) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Constructs a binary cell-by-gene expression matrix and a centroid coordinate matrix from transcript-level input data.
 
-# ------------------------------------------------------------------------------------------------
-# Plot segmented cells
-# ------------------------------------------------------------------------------------------------
+    This function processes a per-transcript DataFrame to:
+    1. Generate a binary cell-by-gene expression matrix indicating whether each gene is present in each cell.
+    2. Compute per-cell centroid coordinates based on the average x and y positions of its transcripts.
+
+    Args:
+        df (pd.DataFrame): 
+            Input DataFrame containing per-transcript data with at least gene, cell, and spatial coordinate columns.
+        gene_col (str, optional): 
+            Name of the column representing gene identity. Default is 'gene'.
+        cell_col (str, optional): 
+            Name of the column representing cell identity. Default is 'cell_id'.
+        cluster_col (str, optional): 
+            Name of the column representing cluster identity. Default is 'cluster'.
+        x_col (str, optional): 
+            Name of the column representing x-coordinate of each transcript. Default is 'x'.
+        y_col (str, optional): 
+            Name of the column representing y-coordinate of each transcript. Default is 'y'.
+
+    Returns:
+        expression_matrix (pd.DataFrame): 
+            A sparse binary DataFrame where rows are cells, columns are genes, and values indicate gene presence in each cell.
+        metadata (pd.DataFrame): 
+            A DataFrame indexed by cell ID with columns 'centroid_x', 'centroid_y', and 'cluster'
+            representing the average spatial position of transcripts assigned to each cell and the cluster identity.
+    """
+    # Drop rows with missing required fields
+    df = df.dropna(subset=[gene_col, cell_col, cluster_col, x_col, y_col])
+    
+    # Convert to categorical for efficient indexing
+    df[cell_col] = df[cell_col].astype('category')
+    df[gene_col] = df[gene_col].astype('category')
+    df[cluster_col] = df[cluster_col].astype('category')
+
+    # Get integer codes for cells and genes
+    cell_categories = df[cell_col].cat.categories
+    gene_categories = df[gene_col].cat.categories
+    cell_index = df[cell_col].cat.codes.to_numpy()
+    gene_index = df[gene_col].cat.codes.to_numpy()
+
+    # Build sparse binary matrix
+    values = np.ones(len(df), dtype=int)
+    expression_sparse = coo_matrix(
+        (values, (cell_index, gene_index)),
+        shape=(len(cell_categories), len(gene_categories))
+    )
+
+    expression_matrix = pd.DataFrame.sparse.from_spmatrix(
+        expression_sparse, 
+        index=cell_categories, 
+        columns=gene_categories
+    )
+
+    # Compute per-cell spatial centroid
+    metadata = (
+        df.groupby(cell_col, observed=True)[[x_col, y_col]]
+        .mean()
+        .rename(columns={x_col: 'centroid_x', y_col: 'centroid_y'})
+    )
+
+    # Assign the most frequent cluster per cell
+    metadata['cluster'] = df.groupby(cell_col, observed=True)[cluster_col].agg(lambda x: x.mode().iloc[0])
+    metadata.index.name = None
+
+    return expression_matrix, metadata
+
+
+### Plot segmented cells
 def plot_segmented_cells(
     df: pd.DataFrame, 
     cell_label: str = "cell_label", 
     cluster_label: str = "binned_cluster", 
     x: str = "x_location", 
     y: str = "y_location", 
-    fig_title: str = "Segmented Cells (ScaleFlow)", 
+    fig_title: str = "Segmented Cells", 
     h: float = 5, 
     w: float = 5, 
     cmap: Optional[Colormap] = None,
@@ -583,22 +897,42 @@ def plot_segmented_cells(
     s: float = 20, 
     alpha: float = 0.9
 ) -> None:
-    """
-    Plot segmented cell boundaries using alpha shapes and color points by cluster.
+    """Plots segmented cell boundaries using alpha shapes and colors points by cluster.
 
-    Parameters
-    ----------
-    df : pd.DataFrame
-    cell_label : str, per-cell assignment ID
-    cluster_label : str, per-transcript cluster label (for color)
-    x, y : str, coordinate column names
-    alpha_val : float, alpha parameter for alpha shapes
-    fig_title : str, title of the plot 
-    h, w : float, figure height and width
-    linewidth : float, boundary line width
-    s : float, point size
-    alpha : float, point transparency 
-    cmap : matplotlib colormap or None
+    This function generates a scatter plot of transcripts colored by cluster labels 
+    and overlays cell boundaries computed from alpha shapes of each cell.
+
+    Args:
+        df (pd.DataFrame): 
+            Input DataFrame containing per-transcript spatial coordinates and cell/cluster labels.
+        cell_label (str, optional): 
+            Column name representing per-transcript cell assignment. Defaults to "cell_label".
+        cluster_label (str, optional): 
+            Column name for cluster/group assignment used for coloring points. Defaults to "binned_cluster".
+        x (str, optional): 
+            Column name for x-coordinate. Defaults to "x_location".
+        y (str, optional): 
+            Column name for y-coordinate. Defaults to "y_location".
+        fig_title (str, optional): 
+            Title to be shown on the plot. Defaults to "Segmented Cells".
+        h (float, optional): 
+            Height of the figure in inches. Defaults to 5.
+        w (float, optional): 
+            Width of the figure in inches. Defaults to 5.
+        cmap (Optional[Colormap], optional): 
+            Colormap for cluster coloring. If None, the default matplotlib color cycle is used. Defaults to None.
+        alpha_val (float, optional): 
+            Alpha parameter used to compute alpha shapes for boundaries. Defaults to 0.1.
+        linewidth (float, optional): 
+            Width of boundary lines for each cell. Defaults to 1.5.
+        s (float, optional): 
+            Size of scatter points. Defaults to 20.
+        alpha (float, optional): 
+            Transparency of scatter points. Defaults to 0.9.
+
+    Returns:
+        None: 
+            Displays the plot inline; does not return anything.
     """
     _, ax = plt.subplots(figsize=(w, h))
 
@@ -636,4 +970,4 @@ def plot_segmented_cells(
         spine.set_visible(False)
 
     plt.tight_layout()
-    plt.show()
+    plt.show() 

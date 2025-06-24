@@ -74,7 +74,6 @@ def compute_loss(W, feature_dist, inv_spatial_dist, spatial_w=1, log_barrier_w=5
     return total_loss
 
 
-
 def train_neighbor_weights(
     adata,
     feature_emb: str = 'X_pca',
@@ -83,7 +82,7 @@ def train_neighbor_weights(
     weight_key: str = 'Weight',
     k: int = 50,
     neighbor_weight: float = 0.1,
-    num_epochs: int = 20000,
+    num_epochs: int = 10000,
     lr: float = 1e-4,
     cuda: str = 'cuda:0',
     seed: int = 42,
@@ -110,16 +109,26 @@ def train_neighbor_weights(
             Key to store the trained weights in `adata.uns` and `adata.obs`. Defaults to 'Weight'.
         k (int, optional): 
             Number of nearest neighbors to consider. Defaults to 50.
-        neighbor_weight (float, optional): Weight for neighbor features in smoothing. Defaults to 0.1.
-        num_epochs (int, optional): Number of training epochs. Defaults to 20000.
-        lr (float, optional): Learning rate for training. Defaults to 1e-4.
-        cuda (str, optional): Device to use for training ('cuda:X' or 'cpu'). Defaults to 'cuda:0'.
-        batch (bool, optional): Whether to compute feature distances in batches. Defaults to False.
-        batch_size (int, optional): Batch size for computing feature distances. Defaults to 2048.
-        seed (int, optional): Random seed for reproducibility. Defaults to 42.
-        spatial_w (float, optional): Weight for spatial distance decay. Defaults to 1.
-        log_barrier_w (float, optional): Weight for the log barrier term. Defaults to 100.
-        sparisty_w (float, optional): Weight for the sparsity penalty term. Defaults to 0.01.
+        neighbor_weight (float, optional):
+            Weight for neighbor features in smoothing after training. Default: 0.1 (regional), 0.2 (subcellular).
+        num_epochs (int, optional): 
+            Number of training epochs. Defaults to 10000.
+        lr (float, optional): 
+            Learning rate for training. Defaults to 1e-4.
+        cuda (str, optional): 
+            Device to use for training ('cuda:X' or 'cpu'). Defaults to 'cuda:0'.
+        batch (bool, optional): 
+            Whether to compute feature distances in batches. Defaults to False.
+        batch_size (int, optional): 
+            Batch size for computing feature distances. Defaults to 2048 if `batch` is True.
+        seed (int, optional): 
+            Random seed for reproducibility. Defaults to 42.
+        spatial_w (float, optional): 
+            Weight for spatial distance decay. Defaults to 1.
+        log_barrier_w (float, optional):  
+            Weight for the log-barrier regularization term. Default is 100; can be adjusted based on dataset.
+        sparsity_w (float, optional): 
+            Weight for the sparsity penalty term. Defaults to 0.01.
 
     Returns:
         adata (AnnData): Updated AnnData object with trained weights and smoothed features.
@@ -179,7 +188,7 @@ def train_neighbor_weights(
                 inv_dist, 
                 spatial_w=spatial_w, 
                 log_barrier_w=log_barrier_w, 
-                sparisty_w=sparsity_w
+                sparsity_w=sparsity_w
             )
             loss.backward()
             optimizer.step()
