@@ -10,7 +10,7 @@ from typing import List, Tuple
 from .model import train_neighbor_weights
 
 
-### Smooth region labels based on spatial k-nearest neighbors 
+### Smooth cluster labels based on spatial k-nearest neighbors (regions)
 def spatial_smooth(
     adata: AnnData,
     k: int = 10, 

@@ -40,7 +40,7 @@ from glimmer_st.model import train_neighbor_weights
 adata = sc.read_h5ad("example_data.h5ad")
 
 # Learn neighbor weights based on spatial structure
-train_neighbor_weights(adata, spatial_key='spatial', k=30)
+adata = train_neighbor_weights(adata, spatial_key='spatial', k=50)
 
 # Access the learned weights
 weights = adata.obsp['neighbor_weights']
@@ -51,4 +51,5 @@ xxxxxxxxxxxx
 
 📫 Contact
 Qiyu Gong
+
 📧 gongqiyu@broadinstitute.org & qiyugong23@gmail.com

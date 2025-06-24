@@ -20,7 +20,7 @@ from typing import Tuple
 from scipy.sparse import coo_matrix
 
 
-### Bin spatial points spatially and compute gene expression per bin (For image-based data)
+### Bin spatial points and compute gene expression per bin (For image-based data)
 def bin_spatial_points(
     data: pd.DataFrame,
     n_points: int = 100,

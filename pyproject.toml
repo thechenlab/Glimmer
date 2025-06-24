@@ -14,7 +14,7 @@ authors = [
 ]
 dependencies = [
     "numpy==2.2.6",
-    "torch==2.7.0",             # NOTE: +cu126 is usually handled by pip/conda separately (e.g., torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126)
+    "torch==2.7.0",             
     "scipy==1.15.3",
     "tqdm==4.67.1",
     "scikit-learn==1.5.2",

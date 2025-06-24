@@ -4,7 +4,7 @@ setup(
     name='glimmer-st',
     version='0.1.0',
     author='Qiyu Gong',
-    author_email='gongqiyu@broadinstitute.org',
+    author_email='gongqiyu@broadinstitute.org & qiyugong23@gmail.com',
     description='A Unified Framework for Graph-Based Representation of Spatial Structures Across Modalities and Scales',
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',

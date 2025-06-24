@@ -1,17 +1,12 @@
 __author__ = "Qiyu Gong"
 __email__ = "gongqiyu@broadinstitute.org"
 
-# Core training function
 from .model import train_neighbor_weights
-
-# Utility functions
 from .utils import (
     spatial_smooth, 
     run_logbarrier_weight, 
     plot_logbarrier_curve
 )
-
-# Segmentation and spatial processing
 from .segment import (
     bin_spatial_points,
     assign_cell_by_voronoi,

@@ -18,7 +18,7 @@ def set_seed(seed=42):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-
+# main loss function
 def compute_loss(W, feature_dist, inv_spatial_dist, spatial_w=1, log_barrier_w=50, sparsity_w=0.01):
     r"""
     Compute the regularized Dirichlet energy loss.
@@ -73,7 +73,7 @@ def compute_loss(W, feature_dist, inv_spatial_dist, spatial_w=1, log_barrier_w=5
 
     return total_loss
 
-
+# main function
 def train_neighbor_weights(
     adata,
     feature_emb: str = 'X_pca',
