@@ -1,0 +1,493 @@
+Model,FOV,Metric,Num_Clusters,Dissimilarity_Score
+Baysor (NCV),10-11,Cosine Distance,5,0.6700840803094014
+Baysor (NCV),10-11,Cosine Distance,6,0.6341048906182193
+Baysor (NCV),10-11,Cosine Distance,7,0.6100204806082078
+Baysor (NCV),10-11,Jensen-Shannon Divergence,5,0.48869763027139007
+Baysor (NCV),10-11,Jensen-Shannon Divergence,6,0.47937175215668104
+Baysor (NCV),10-11,Jensen-Shannon Divergence,7,0.46815806287773315
+Baysor (NCV),13-14,Cosine Distance,5,0.684128310537724
+Baysor (NCV),13-14,Cosine Distance,6,0.6359117271605969
+Baysor (NCV),13-14,Cosine Distance,7,0.5923362376560826
+Baysor (NCV),13-14,Jensen-Shannon Divergence,5,0.49749524334702533
+Baysor (NCV),13-14,Jensen-Shannon Divergence,6,0.4790843646875337
+Baysor (NCV),13-14,Jensen-Shannon Divergence,7,0.46034892468544486
+Baysor (NCV),15-16,Cosine Distance,5,0.48049591154936433
+Baysor (NCV),15-16,Cosine Distance,6,0.4899968471718064
+Baysor (NCV),15-16,Cosine Distance,7,0.5594061967419186
+Baysor (NCV),15-16,Jensen-Shannon Divergence,5,0.4271052404172829
+Baysor (NCV),15-16,Jensen-Shannon Divergence,6,0.44150381069889305
+Baysor (NCV),15-16,Jensen-Shannon Divergence,7,0.4643991902362621
+Baysor (NCV),17-18,Cosine Distance,5,0.4192871353987092
+Baysor (NCV),17-18,Cosine Distance,6,0.5550226331319261
+Baysor (NCV),17-18,Cosine Distance,7,0.5406999330522531
+Baysor (NCV),17-18,Jensen-Shannon Divergence,5,0.4087443337738768
+Baysor (NCV),17-18,Jensen-Shannon Divergence,6,0.46715727738337176
+Baysor (NCV),17-18,Jensen-Shannon Divergence,7,0.47069991641886133
+Baysor (NCV),21-22,Cosine Distance,5,0.6220052711891142
+Baysor (NCV),21-22,Cosine Distance,6,0.5563926008242654
+Baysor (NCV),21-22,Cosine Distance,7,0.5196218248961525
+Baysor (NCV),21-22,Jensen-Shannon Divergence,5,0.4945770834375606
+Baysor (NCV),21-22,Jensen-Shannon Divergence,6,0.4641116283012715
+Baysor (NCV),21-22,Jensen-Shannon Divergence,7,0.44549384394407265
+Baysor (NCV),23-24,Cosine Distance,5,0.4424738780961544
+Baysor (NCV),23-24,Cosine Distance,6,0.5186723604508419
+Baysor (NCV),23-24,Cosine Distance,7,0.48901245020777784
+Baysor (NCV),23-24,Jensen-Shannon Divergence,5,0.4246945031890005
+Baysor (NCV),23-24,Jensen-Shannon Divergence,6,0.43994356545388597
+Baysor (NCV),23-24,Jensen-Shannon Divergence,7,0.4269021208643714
+Baysor (NCV),27-28,Cosine Distance,5,0.6065853837700391
+Baysor (NCV),27-28,Cosine Distance,6,0.5669778184606196
+Baysor (NCV),27-28,Cosine Distance,7,0.6162304265782408
+Baysor (NCV),27-28,Jensen-Shannon Divergence,5,0.4857642824769264
+Baysor (NCV),27-28,Jensen-Shannon Divergence,6,0.46733499375054244
+Baysor (NCV),27-28,Jensen-Shannon Divergence,7,0.4813056684451678
+Baysor (NCV),29-30,Cosine Distance,5,0.48444649533444223
+Baysor (NCV),29-30,Cosine Distance,6,0.45881714187523615
+Baysor (NCV),29-30,Cosine Distance,7,0.43588791105628083
+Baysor (NCV),29-30,Jensen-Shannon Divergence,5,0.4379149579891993
+Baysor (NCV),29-30,Jensen-Shannon Divergence,6,0.42871329474633496
+Baysor (NCV),29-30,Jensen-Shannon Divergence,7,0.4207866623907278
+Baysor (NCV),31-32,Cosine Distance,5,0.4400454130591762
+Baysor (NCV),31-32,Cosine Distance,6,0.4520433066125696
+Baysor (NCV),31-32,Cosine Distance,7,0.44188834886746553
+Baysor (NCV),31-32,Jensen-Shannon Divergence,5,0.4242811389417194
+Baysor (NCV),31-32,Jensen-Shannon Divergence,6,0.4322652554735981
+Baysor (NCV),31-32,Jensen-Shannon Divergence,7,0.4236944630066943
+Baysor (NCV),33-34,Cosine Distance,5,0.5991489037508367
+Baysor (NCV),33-34,Cosine Distance,6,0.5369892618012883
+Baysor (NCV),33-34,Cosine Distance,7,0.5166434175635848
+Baysor (NCV),33-34,Jensen-Shannon Divergence,5,0.4650951395302917
+Baysor (NCV),33-34,Jensen-Shannon Divergence,6,0.4405385223897763
+Baysor (NCV),33-34,Jensen-Shannon Divergence,7,0.43439882047957906
+Baysor (NCV),39-40,Cosine Distance,5,0.6288580105759994
+Baysor (NCV),39-40,Cosine Distance,6,0.568008180711556
+Baysor (NCV),39-40,Cosine Distance,7,0.5581003088170596
+Baysor (NCV),39-40,Jensen-Shannon Divergence,5,0.48724193120627807
+Baysor (NCV),39-40,Jensen-Shannon Divergence,6,0.4659721896838623
+Baysor (NCV),39-40,Jensen-Shannon Divergence,7,0.4633332117660283
+Baysor (NCV),41-42,Cosine Distance,5,0.47915716533786423
+Baysor (NCV),41-42,Cosine Distance,6,0.5926071879115141
+Baysor (NCV),41-42,Cosine Distance,7,0.5520160216212426
+Baysor (NCV),41-42,Jensen-Shannon Divergence,5,0.41590375692885795
+Baysor (NCV),41-42,Jensen-Shannon Divergence,6,0.4774087136079086
+Baysor (NCV),41-42,Jensen-Shannon Divergence,7,0.45744252852740613
+Baysor (NCV),43-44,Cosine Distance,5,0.44343557903992004
+Baysor (NCV),43-44,Cosine Distance,6,0.40805846418210595
+Baysor (NCV),43-44,Cosine Distance,7,0.4567426813986206
+Baysor (NCV),43-44,Jensen-Shannon Divergence,5,0.4115674688940386
+Baysor (NCV),43-44,Jensen-Shannon Divergence,6,0.39529683302393637
+Baysor (NCV),43-44,Jensen-Shannon Divergence,7,0.4149357660826162
+Baysor (NCV),7-8,Cosine Distance,5,0.3970692302470784
+Baysor (NCV),7-8,Cosine Distance,6,0.5292960342672531
+Baysor (NCV),7-8,Cosine Distance,7,0.5010930952844987
+Baysor (NCV),7-8,Jensen-Shannon Divergence,5,0.38824241092290596
+Baysor (NCV),7-8,Jensen-Shannon Divergence,6,0.44854644201923777
+Baysor (NCV),7-8,Jensen-Shannon Divergence,7,0.4334233753833165
+Baysor (NCV),9-10,Cosine Distance,5,0.4939047722831885
+Baysor (NCV),9-10,Cosine Distance,6,0.6013230971279142
+Baysor (NCV),9-10,Cosine Distance,7,0.5559844247940712
+Baysor (NCV),9-10,Jensen-Shannon Divergence,5,0.4429616770732764
+Baysor (NCV),9-10,Jensen-Shannon Divergence,6,0.4927402080055555
+Baysor (NCV),9-10,Jensen-Shannon Divergence,7,0.4729839448793114
+Cellpose,10-11,Cosine Distance,5,0.4076086938895587
+Cellpose,10-11,Cosine Distance,7,0.4159589483279483
+Cellpose,10-11,Jensen-Shannon Divergence,5,0.35394636516944383
+Cellpose,10-11,Jensen-Shannon Divergence,7,0.3609364494928617
+Cellpose,13-14,Cosine Distance,5,0.33555449672637894
+Cellpose,13-14,Cosine Distance,6,0.30900136469923284
+Cellpose,13-14,Cosine Distance,7,0.2870784547526611
+Cellpose,13-14,Jensen-Shannon Divergence,5,0.32136594712369704
+Cellpose,13-14,Jensen-Shannon Divergence,6,0.3075261522373174
+Cellpose,13-14,Jensen-Shannon Divergence,7,0.3006423904706363
+Cellpose,15-16,Cosine Distance,5,0.32242958586082354
+Cellpose,15-16,Cosine Distance,6,0.3444091222257559
+Cellpose,15-16,Cosine Distance,7,0.29944424382969564
+Cellpose,15-16,Jensen-Shannon Divergence,5,0.3350092894934389
+Cellpose,15-16,Jensen-Shannon Divergence,6,0.33550090653242465
+Cellpose,15-16,Jensen-Shannon Divergence,7,0.3082940628499204
+Cellpose,17-18,Cosine Distance,5,0.3414439036518241
+Cellpose,17-18,Cosine Distance,6,0.3544868317198013
+Cellpose,17-18,Cosine Distance,7,0.36309583671294576
+Cellpose,17-18,Jensen-Shannon Divergence,5,0.3444503234424985
+Cellpose,17-18,Jensen-Shannon Divergence,6,0.3456758835860112
+Cellpose,17-18,Jensen-Shannon Divergence,7,0.35404439873634397
+Cellpose,21-22,Cosine Distance,5,0.4013738260019917
+Cellpose,21-22,Cosine Distance,7,0.3685266263838917
+Cellpose,21-22,Jensen-Shannon Divergence,5,0.34975961509114606
+Cellpose,21-22,Jensen-Shannon Divergence,7,0.33672343317525577
+Cellpose,23-24,Cosine Distance,5,0.2817290505653341
+Cellpose,23-24,Cosine Distance,6,0.26738203994724014
+Cellpose,23-24,Cosine Distance,7,0.2546189409730804
+Cellpose,23-24,Jensen-Shannon Divergence,5,0.28296770582911157
+Cellpose,23-24,Jensen-Shannon Divergence,6,0.2821120945608897
+Cellpose,23-24,Jensen-Shannon Divergence,7,0.2771011132338347
+Cellpose,27-28,Cosine Distance,5,0.43969444051011813
+Cellpose,27-28,Cosine Distance,7,0.35161756106202735
+Cellpose,27-28,Jensen-Shannon Divergence,5,0.3781929512528131
+Cellpose,27-28,Jensen-Shannon Divergence,7,0.3356868604269356
+Cellpose,29-30,Cosine Distance,5,0.3070904605489485
+Cellpose,29-30,Cosine Distance,6,0.31787494765232743
+Cellpose,29-30,Cosine Distance,7,0.3377626538527949
+Cellpose,29-30,Jensen-Shannon Divergence,5,0.3213867416287119
+Cellpose,29-30,Jensen-Shannon Divergence,6,0.33017300185998705
+Cellpose,29-30,Jensen-Shannon Divergence,7,0.3382773673842303
+Cellpose,31-32,Cosine Distance,5,0.3107591410401159
+Cellpose,31-32,Cosine Distance,6,0.30323676977767244
+Cellpose,31-32,Cosine Distance,7,0.33629060680426837
+Cellpose,31-32,Jensen-Shannon Divergence,5,0.30022776452316
+Cellpose,31-32,Jensen-Shannon Divergence,6,0.300109839864404
+Cellpose,31-32,Jensen-Shannon Divergence,7,0.3199518965542553
+Cellpose,33-34,Cosine Distance,5,0.25431907522925506
+Cellpose,33-34,Cosine Distance,6,0.23513148962072822
+Cellpose,33-34,Cosine Distance,7,0.23222301517320543
+Cellpose,33-34,Jensen-Shannon Divergence,5,0.27948323830662647
+Cellpose,33-34,Jensen-Shannon Divergence,6,0.2764511317402393
+Cellpose,33-34,Jensen-Shannon Divergence,7,0.26800094952237974
+Cellpose,39-40,Cosine Distance,5,0.3983288094329606
+Cellpose,39-40,Cosine Distance,6,0.38715760552303713
+Cellpose,39-40,Cosine Distance,7,0.3793655211797192
+Cellpose,39-40,Jensen-Shannon Divergence,5,0.3616320809314729
+Cellpose,39-40,Jensen-Shannon Divergence,6,0.35772199381692027
+Cellpose,39-40,Jensen-Shannon Divergence,7,0.3474512540477813
+Cellpose,41-42,Cosine Distance,5,0.34698031269162655
+Cellpose,41-42,Cosine Distance,6,0.3427169535320433
+Cellpose,41-42,Cosine Distance,7,0.30488937363228474
+Cellpose,41-42,Jensen-Shannon Divergence,5,0.3216553135609445
+Cellpose,41-42,Jensen-Shannon Divergence,6,0.3174187211580459
+Cellpose,41-42,Jensen-Shannon Divergence,7,0.2974762261442091
+Cellpose,43-44,Cosine Distance,5,0.2057201945972924
+Cellpose,43-44,Cosine Distance,6,0.27624719824377164
+Cellpose,43-44,Cosine Distance,7,0.26712144569781754
+Cellpose,43-44,Jensen-Shannon Divergence,5,0.2507674069168088
+Cellpose,43-44,Jensen-Shannon Divergence,6,0.29459563630279806
+Cellpose,43-44,Jensen-Shannon Divergence,7,0.3086526538780556
+Cellpose,7-8,Cosine Distance,5,0.40458871953705167
+Cellpose,7-8,Cosine Distance,6,0.40185503340041706
+Cellpose,7-8,Cosine Distance,7,0.4039919726823721
+Cellpose,7-8,Jensen-Shannon Divergence,5,0.36040379179850923
+Cellpose,7-8,Jensen-Shannon Divergence,6,0.36022680588110334
+Cellpose,7-8,Jensen-Shannon Divergence,7,0.36443085275166287
+Cellpose,9-10,Cosine Distance,5,0.39881290473892506
+Cellpose,9-10,Cosine Distance,6,0.4354376569674195
+Cellpose,9-10,Cosine Distance,7,0.42591404827000257
+Cellpose,9-10,Jensen-Shannon Divergence,5,0.3597854951159809
+Cellpose,9-10,Jensen-Shannon Divergence,6,0.37644352689199345
+Cellpose,9-10,Jensen-Shannon Divergence,7,0.3720848003744814
+FICTURE (Hexagon),10-11,Cosine Distance,5,0.190356087239955
+FICTURE (Hexagon),10-11,Cosine Distance,6,0.18582006591976014
+FICTURE (Hexagon),10-11,Cosine Distance,7,0.17687162435563727
+FICTURE (Hexagon),10-11,Jensen-Shannon Divergence,5,0.240149072737655
+FICTURE (Hexagon),10-11,Jensen-Shannon Divergence,6,0.2396762679397089
+FICTURE (Hexagon),10-11,Jensen-Shannon Divergence,7,0.2293868366515236
+FICTURE (Hexagon),13-14,Cosine Distance,5,0.16547856447254333
+FICTURE (Hexagon),13-14,Cosine Distance,6,0.14565501580866816
+FICTURE (Hexagon),13-14,Cosine Distance,7,0.13752292964575097
+FICTURE (Hexagon),13-14,Jensen-Shannon Divergence,5,0.2379570314763127
+FICTURE (Hexagon),13-14,Jensen-Shannon Divergence,6,0.22833036863453188
+FICTURE (Hexagon),13-14,Jensen-Shannon Divergence,7,0.22135534616257
+FICTURE (Hexagon),15-16,Cosine Distance,5,0.17560010004344617
+FICTURE (Hexagon),15-16,Cosine Distance,6,0.1497254987317489
+FICTURE (Hexagon),15-16,Cosine Distance,7,0.16507492535244614
+FICTURE (Hexagon),15-16,Jensen-Shannon Divergence,5,0.25892538820515754
+FICTURE (Hexagon),15-16,Jensen-Shannon Divergence,6,0.23746794130110122
+FICTURE (Hexagon),15-16,Jensen-Shannon Divergence,7,0.24937029404291783
+FICTURE (Hexagon),17-18,Cosine Distance,5,0.12646872434644313
+FICTURE (Hexagon),17-18,Cosine Distance,6,0.10690809476673938
+FICTURE (Hexagon),17-18,Cosine Distance,7,0.1112626065347148
+FICTURE (Hexagon),17-18,Jensen-Shannon Divergence,5,0.22692869680261823
+FICTURE (Hexagon),17-18,Jensen-Shannon Divergence,6,0.20232984108851446
+FICTURE (Hexagon),17-18,Jensen-Shannon Divergence,7,0.20783394109688133
+FICTURE (Hexagon),21-22,Cosine Distance,5,0.13785134203549432
+FICTURE (Hexagon),21-22,Cosine Distance,6,0.13703158666654863
+FICTURE (Hexagon),21-22,Cosine Distance,7,0.14100200866571638
+FICTURE (Hexagon),21-22,Jensen-Shannon Divergence,5,0.2138193915891024
+FICTURE (Hexagon),21-22,Jensen-Shannon Divergence,6,0.2142816838284741
+FICTURE (Hexagon),21-22,Jensen-Shannon Divergence,7,0.20994302966277123
+FICTURE (Hexagon),23-24,Cosine Distance,5,0.13677024247426303
+FICTURE (Hexagon),23-24,Cosine Distance,6,0.12874970948757003
+FICTURE (Hexagon),23-24,Cosine Distance,7,0.11397989315709053
+FICTURE (Hexagon),23-24,Jensen-Shannon Divergence,5,0.21597653116647372
+FICTURE (Hexagon),23-24,Jensen-Shannon Divergence,6,0.2070856881000729
+FICTURE (Hexagon),23-24,Jensen-Shannon Divergence,7,0.1876381670875584
+FICTURE (Hexagon),27-28,Cosine Distance,5,0.12817970735206094
+FICTURE (Hexagon),27-28,Cosine Distance,6,0.12032647335295875
+FICTURE (Hexagon),27-28,Cosine Distance,7,0.11535139421211202
+FICTURE (Hexagon),27-28,Jensen-Shannon Divergence,5,0.2140657559821495
+FICTURE (Hexagon),27-28,Jensen-Shannon Divergence,6,0.20459883341851623
+FICTURE (Hexagon),27-28,Jensen-Shannon Divergence,7,0.20156879534182928
+FICTURE (Hexagon),29-30,Cosine Distance,5,0.1362532473657591
+FICTURE (Hexagon),29-30,Cosine Distance,6,0.1364551322602562
+FICTURE (Hexagon),29-30,Cosine Distance,7,0.12253894246037454
+FICTURE (Hexagon),29-30,Jensen-Shannon Divergence,5,0.22778104562388873
+FICTURE (Hexagon),29-30,Jensen-Shannon Divergence,6,0.226247310285354
+FICTURE (Hexagon),29-30,Jensen-Shannon Divergence,7,0.21332473115060105
+FICTURE (Hexagon),31-32,Cosine Distance,5,0.15052015345880482
+FICTURE (Hexagon),31-32,Cosine Distance,6,0.13219892647285184
+FICTURE (Hexagon),31-32,Cosine Distance,7,0.12908084852942914
+FICTURE (Hexagon),31-32,Jensen-Shannon Divergence,5,0.22435246991259375
+FICTURE (Hexagon),31-32,Jensen-Shannon Divergence,6,0.21224462429916333
+FICTURE (Hexagon),31-32,Jensen-Shannon Divergence,7,0.2069498725676993
+FICTURE (Hexagon),33-34,Cosine Distance,5,0.14230541832924648
+FICTURE (Hexagon),33-34,Cosine Distance,6,0.14409663874946618
+FICTURE (Hexagon),33-34,Cosine Distance,7,0.12789864105600723
+FICTURE (Hexagon),33-34,Jensen-Shannon Divergence,5,0.21353124794451298
+FICTURE (Hexagon),33-34,Jensen-Shannon Divergence,6,0.21227894709597558
+FICTURE (Hexagon),33-34,Jensen-Shannon Divergence,7,0.20352976023291824
+FICTURE (Hexagon),39-40,Cosine Distance,5,0.15376465850383572
+FICTURE (Hexagon),39-40,Cosine Distance,6,0.1362147893283284
+FICTURE (Hexagon),39-40,Cosine Distance,7,0.1258433381679391
+FICTURE (Hexagon),39-40,Jensen-Shannon Divergence,5,0.2202555449873088
+FICTURE (Hexagon),39-40,Jensen-Shannon Divergence,6,0.2119533579637669
+FICTURE (Hexagon),39-40,Jensen-Shannon Divergence,7,0.19991381577468811
+FICTURE (Hexagon),41-42,Cosine Distance,5,0.16953335878589554
+FICTURE (Hexagon),41-42,Cosine Distance,6,0.1483352068117832
+FICTURE (Hexagon),41-42,Cosine Distance,7,0.1279578136619277
+FICTURE (Hexagon),41-42,Jensen-Shannon Divergence,5,0.22191174403779126
+FICTURE (Hexagon),41-42,Jensen-Shannon Divergence,6,0.2099174464621303
+FICTURE (Hexagon),41-42,Jensen-Shannon Divergence,7,0.2010328693340448
+FICTURE (Hexagon),43-44,Cosine Distance,5,0.1255657286421335
+FICTURE (Hexagon),43-44,Cosine Distance,6,0.12085338283279073
+FICTURE (Hexagon),43-44,Cosine Distance,7,0.11136549124400592
+FICTURE (Hexagon),43-44,Jensen-Shannon Divergence,5,0.20026156446106969
+FICTURE (Hexagon),43-44,Jensen-Shannon Divergence,6,0.20644158311212638
+FICTURE (Hexagon),43-44,Jensen-Shannon Divergence,7,0.19584424713427698
+FICTURE (Hexagon),7-8,Cosine Distance,5,0.09998294485800126
+FICTURE (Hexagon),7-8,Cosine Distance,6,0.0910759783180762
+FICTURE (Hexagon),7-8,Cosine Distance,7,0.08679775609234738
+FICTURE (Hexagon),7-8,Jensen-Shannon Divergence,5,0.19758033156721072
+FICTURE (Hexagon),7-8,Jensen-Shannon Divergence,6,0.1908897044906108
+FICTURE (Hexagon),7-8,Jensen-Shannon Divergence,7,0.18459951384626713
+FICTURE (Hexagon),9-10,Cosine Distance,5,0.1572038400337032
+FICTURE (Hexagon),9-10,Cosine Distance,6,0.15209778680028727
+FICTURE (Hexagon),9-10,Cosine Distance,7,0.14714476803506807
+FICTURE (Hexagon),9-10,Jensen-Shannon Divergence,5,0.24037892817269763
+FICTURE (Hexagon),9-10,Jensen-Shannon Divergence,6,0.23680701039214883
+FICTURE (Hexagon),9-10,Jensen-Shannon Divergence,7,0.2249682161966669
+Glimmer (Bin),10-11,Cosine Distance,5,0.6296429647041036
+Glimmer (Bin),10-11,Cosine Distance,6,0.6557026657828074
+Glimmer (Bin),10-11,Jensen-Shannon Divergence,5,0.4637616865171502
+Glimmer (Bin),10-11,Jensen-Shannon Divergence,6,0.4715005877496443
+Glimmer (Bin),13-14,Cosine Distance,5,0.6000609262816756
+Glimmer (Bin),13-14,Cosine Distance,7,0.6188951612040938
+Glimmer (Bin),13-14,Jensen-Shannon Divergence,5,0.4449310437011813
+Glimmer (Bin),13-14,Jensen-Shannon Divergence,7,0.47764294626824344
+Glimmer (Bin),15-16,Cosine Distance,5,0.5021860839906884
+Glimmer (Bin),15-16,Cosine Distance,6,0.56222734361949
+Glimmer (Bin),15-16,Cosine Distance,7,0.6401090817825816
+Glimmer (Bin),15-16,Jensen-Shannon Divergence,5,0.40497997128411845
+Glimmer (Bin),15-16,Jensen-Shannon Divergence,6,0.47888915205885363
+Glimmer (Bin),15-16,Jensen-Shannon Divergence,7,0.5463344257019116
+Glimmer (Bin),17-18,Cosine Distance,6,0.5771273840413571
+Glimmer (Bin),17-18,Cosine Distance,7,0.5667052968350745
+Glimmer (Bin),17-18,Jensen-Shannon Divergence,6,0.4619595780902494
+Glimmer (Bin),17-18,Jensen-Shannon Divergence,7,0.4359695981600789
+Glimmer (Bin),21-22,Cosine Distance,5,0.6227875296163721
+Glimmer (Bin),21-22,Cosine Distance,7,0.6297516551591416
+Glimmer (Bin),21-22,Jensen-Shannon Divergence,5,0.4550491863367744
+Glimmer (Bin),21-22,Jensen-Shannon Divergence,7,0.4707539093947591
+Glimmer (Bin),23-24,Cosine Distance,5,0.6093967844210892
+Glimmer (Bin),23-24,Cosine Distance,6,0.6418342249975988
+Glimmer (Bin),23-24,Cosine Distance,7,0.558441529523846
+Glimmer (Bin),23-24,Jensen-Shannon Divergence,5,0.4542923114177918
+Glimmer (Bin),23-24,Jensen-Shannon Divergence,6,0.47625786322219255
+Glimmer (Bin),23-24,Jensen-Shannon Divergence,7,0.41236869135783494
+Glimmer (Bin),27-28,Cosine Distance,5,0.5765470096496448
+Glimmer (Bin),27-28,Cosine Distance,6,0.6362318306131675
+Glimmer (Bin),27-28,Cosine Distance,7,0.6088186287366198
+Glimmer (Bin),27-28,Jensen-Shannon Divergence,5,0.4560627184710614
+Glimmer (Bin),27-28,Jensen-Shannon Divergence,6,0.49028279880434555
+Glimmer (Bin),27-28,Jensen-Shannon Divergence,7,0.47351555497721304
+Glimmer (Bin),29-30,Cosine Distance,5,0.5320645973123636
+Glimmer (Bin),29-30,Cosine Distance,6,0.4726995374226474
+Glimmer (Bin),29-30,Jensen-Shannon Divergence,5,0.4330697939951911
+Glimmer (Bin),29-30,Jensen-Shannon Divergence,6,0.40706709778418015
+Glimmer (Bin),31-32,Cosine Distance,5,0.5910551288040046
+Glimmer (Bin),31-32,Cosine Distance,6,0.5959513904055584
+Glimmer (Bin),31-32,Cosine Distance,7,0.5647372954283503
+Glimmer (Bin),31-32,Jensen-Shannon Divergence,5,0.4358979117146809
+Glimmer (Bin),31-32,Jensen-Shannon Divergence,6,0.44242600774048424
+Glimmer (Bin),31-32,Jensen-Shannon Divergence,7,0.4254441759495182
+Glimmer (Bin),33-34,Cosine Distance,7,0.5747007810956329
+Glimmer (Bin),33-34,Jensen-Shannon Divergence,7,0.44162744196227877
+Glimmer (Bin),39-40,Cosine Distance,5,0.6532378753517609
+Glimmer (Bin),39-40,Cosine Distance,6,0.6203421001516178
+Glimmer (Bin),39-40,Cosine Distance,7,0.6731147928059118
+Glimmer (Bin),39-40,Jensen-Shannon Divergence,5,0.4785317827210192
+Glimmer (Bin),39-40,Jensen-Shannon Divergence,6,0.4735890379152813
+Glimmer (Bin),39-40,Jensen-Shannon Divergence,7,0.511642215703089
+Glimmer (Bin),41-42,Cosine Distance,5,0.6150160843658637
+Glimmer (Bin),41-42,Cosine Distance,6,0.6335743022502149
+Glimmer (Bin),41-42,Cosine Distance,7,0.5992227393450653
+Glimmer (Bin),41-42,Jensen-Shannon Divergence,5,0.45161203336158284
+Glimmer (Bin),41-42,Jensen-Shannon Divergence,6,0.47209067097775154
+Glimmer (Bin),41-42,Jensen-Shannon Divergence,7,0.43203838120187354
+Glimmer (Bin),43-44,Cosine Distance,5,0.567677560064812
+Glimmer (Bin),43-44,Cosine Distance,6,0.5750849258354671
+Glimmer (Bin),43-44,Cosine Distance,7,0.5753309776939461
+Glimmer (Bin),43-44,Jensen-Shannon Divergence,5,0.4330642686367357
+Glimmer (Bin),43-44,Jensen-Shannon Divergence,6,0.4435840787380308
+Glimmer (Bin),43-44,Jensen-Shannon Divergence,7,0.42848573736878054
+Glimmer (Bin),7-8,Cosine Distance,5,0.5942091047610719
+Glimmer (Bin),7-8,Cosine Distance,6,0.6188870915320344
+Glimmer (Bin),7-8,Cosine Distance,7,0.5955234702423285
+Glimmer (Bin),7-8,Jensen-Shannon Divergence,5,0.4485244729010518
+Glimmer (Bin),7-8,Jensen-Shannon Divergence,6,0.47267363002214335
+Glimmer (Bin),7-8,Jensen-Shannon Divergence,7,0.4511424463048578
+Glimmer (Bin),9-10,Cosine Distance,5,0.5920336407797985
+Glimmer (Bin),9-10,Cosine Distance,6,0.5885156923142326
+Glimmer (Bin),9-10,Cosine Distance,7,0.5978879488835448
+Glimmer (Bin),9-10,Jensen-Shannon Divergence,5,0.47003600661776496
+Glimmer (Bin),9-10,Jensen-Shannon Divergence,6,0.4660805832026124
+Glimmer (Bin),9-10,Jensen-Shannon Divergence,7,0.4579473612747573
+Glimmer (Cell),10-11,Cosine Distance,5,0.6729736682252362
+Glimmer (Cell),10-11,Cosine Distance,6,0.7003654543043486
+Glimmer (Cell),10-11,Jensen-Shannon Divergence,5,0.48337664993859947
+Glimmer (Cell),10-11,Jensen-Shannon Divergence,6,0.49138939609797333
+Glimmer (Cell),13-14,Cosine Distance,5,0.6431737540696416
+Glimmer (Cell),13-14,Cosine Distance,7,0.6582606309015789
+Glimmer (Cell),13-14,Jensen-Shannon Divergence,5,0.46514212889186723
+Glimmer (Cell),13-14,Jensen-Shannon Divergence,7,0.4965062296156217
+Glimmer (Cell),15-16,Cosine Distance,5,0.5271150611700255
+Glimmer (Cell),15-16,Cosine Distance,6,0.5930878987650714
+Glimmer (Cell),15-16,Cosine Distance,7,0.6672761721472641
+Glimmer (Cell),15-16,Jensen-Shannon Divergence,5,0.41751132644489514
+Glimmer (Cell),15-16,Jensen-Shannon Divergence,6,0.4939078087215457
+Glimmer (Cell),15-16,Jensen-Shannon Divergence,7,0.5587637019872631
+Glimmer (Cell),17-18,Cosine Distance,6,0.6067339816359025
+Glimmer (Cell),17-18,Cosine Distance,7,0.5936532921050958
+Glimmer (Cell),17-18,Jensen-Shannon Divergence,6,0.47636467186311093
+Glimmer (Cell),17-18,Jensen-Shannon Divergence,7,0.4491310569185657
+Glimmer (Cell),21-22,Cosine Distance,5,0.6651427443606477
+Glimmer (Cell),21-22,Cosine Distance,7,0.6681661167980857
+Glimmer (Cell),21-22,Jensen-Shannon Divergence,5,0.47370253238240967
+Glimmer (Cell),21-22,Jensen-Shannon Divergence,7,0.48903566392340264
+Glimmer (Cell),23-24,Cosine Distance,5,0.6484442513850406
+Glimmer (Cell),23-24,Cosine Distance,6,0.676828855133587
+Glimmer (Cell),23-24,Cosine Distance,7,0.5860331335186781
+Glimmer (Cell),23-24,Jensen-Shannon Divergence,5,0.47162299648614747
+Glimmer (Cell),23-24,Jensen-Shannon Divergence,6,0.49189173892108573
+Glimmer (Cell),23-24,Jensen-Shannon Divergence,7,0.42733722724475937
+Glimmer (Cell),27-28,Cosine Distance,5,0.6040691947310342
+Glimmer (Cell),27-28,Cosine Distance,6,0.6746235888055395
+Glimmer (Cell),27-28,Cosine Distance,7,0.6433466245389853
+Glimmer (Cell),27-28,Jensen-Shannon Divergence,5,0.4709146103416344
+Glimmer (Cell),27-28,Jensen-Shannon Divergence,6,0.5079443611330149
+Glimmer (Cell),27-28,Jensen-Shannon Divergence,7,0.49003292549214666
+Glimmer (Cell),29-30,Cosine Distance,5,0.5567747655647289
+Glimmer (Cell),29-30,Cosine Distance,6,0.48941526739135427
+Glimmer (Cell),29-30,Jensen-Shannon Divergence,5,0.44672419723743606
+Glimmer (Cell),29-30,Jensen-Shannon Divergence,6,0.41977483528262893
+Glimmer (Cell),31-32,Cosine Distance,5,0.6354796432961786
+Glimmer (Cell),31-32,Cosine Distance,6,0.6337407375899725
+Glimmer (Cell),31-32,Cosine Distance,7,0.5970257027800531
+Glimmer (Cell),31-32,Jensen-Shannon Divergence,5,0.4568165401558277
+Glimmer (Cell),31-32,Jensen-Shannon Divergence,6,0.46087328971601965
+Glimmer (Cell),31-32,Jensen-Shannon Divergence,7,0.44221342621847803
+Glimmer (Cell),33-34,Cosine Distance,7,0.6149252982390866
+Glimmer (Cell),33-34,Jensen-Shannon Divergence,7,0.46085726457718074
+Glimmer (Cell),39-40,Cosine Distance,5,0.6949402002988416
+Glimmer (Cell),39-40,Cosine Distance,6,0.6563258001598026
+Glimmer (Cell),39-40,Cosine Distance,7,0.7095680747120736
+Glimmer (Cell),39-40,Jensen-Shannon Divergence,5,0.49663980366078714
+Glimmer (Cell),39-40,Jensen-Shannon Divergence,6,0.48993619533326926
+Glimmer (Cell),39-40,Jensen-Shannon Divergence,7,0.5296536943940697
+Glimmer (Cell),41-42,Cosine Distance,5,0.6529082856275169
+Glimmer (Cell),41-42,Cosine Distance,6,0.6743025499557312
+Glimmer (Cell),41-42,Cosine Distance,7,0.6201440326236415
+Glimmer (Cell),41-42,Jensen-Shannon Divergence,5,0.4685470365810943
+Glimmer (Cell),41-42,Jensen-Shannon Divergence,6,0.4895548377390748
+Glimmer (Cell),41-42,Jensen-Shannon Divergence,7,0.44820628195417717
+Glimmer (Cell),43-44,Cosine Distance,5,0.6044358908794738
+Glimmer (Cell),43-44,Cosine Distance,6,0.6105066634370004
+Glimmer (Cell),43-44,Cosine Distance,7,0.6071605602210872
+Glimmer (Cell),43-44,Jensen-Shannon Divergence,5,0.44845456424282004
+Glimmer (Cell),43-44,Jensen-Shannon Divergence,6,0.461006125510115
+Glimmer (Cell),43-44,Jensen-Shannon Divergence,7,0.4457794390159619
+Glimmer (Cell),7-8,Cosine Distance,5,0.6312347735956461
+Glimmer (Cell),7-8,Cosine Distance,6,0.6582573850127652
+Glimmer (Cell),7-8,Cosine Distance,7,0.6254348508930533
+Glimmer (Cell),7-8,Jensen-Shannon Divergence,5,0.46570293822039005
+Glimmer (Cell),7-8,Jensen-Shannon Divergence,6,0.4917256979025149
+Glimmer (Cell),7-8,Jensen-Shannon Divergence,7,0.4685111112441557
+Glimmer (Cell),9-10,Cosine Distance,5,0.6200006575917171
+Glimmer (Cell),9-10,Cosine Distance,6,0.6219244648198315
+Glimmer (Cell),9-10,Cosine Distance,7,0.6294521294914224
+Glimmer (Cell),9-10,Jensen-Shannon Divergence,5,0.48395747092191393
+Glimmer (Cell),9-10,Jensen-Shannon Divergence,6,0.48113894154298126
+Glimmer (Cell),9-10,Jensen-Shannon Divergence,7,0.47280000063813954
+Xenium,10-11,Cosine Distance,5,0.3382384859797498
+Xenium,10-11,Cosine Distance,6,0.3522523651977935
+Xenium,10-11,Cosine Distance,7,0.35035609417241914
+Xenium,10-11,Jensen-Shannon Divergence,5,0.32283539703843106
+Xenium,10-11,Jensen-Shannon Divergence,6,0.3313498136207806
+Xenium,10-11,Jensen-Shannon Divergence,7,0.33064312307643023
+Xenium,13-14,Cosine Distance,5,0.26129100554751883
+Xenium,13-14,Cosine Distance,6,0.2503055166095543
+Xenium,13-14,Jensen-Shannon Divergence,5,0.2884045009640237
+Xenium,13-14,Jensen-Shannon Divergence,6,0.27614525099232173
+Xenium,15-16,Cosine Distance,5,0.2863847439159121
+Xenium,15-16,Cosine Distance,6,0.2677552503104642
+Xenium,15-16,Cosine Distance,7,0.27824720975600914
+Xenium,15-16,Jensen-Shannon Divergence,5,0.3158450165576513
+Xenium,15-16,Jensen-Shannon Divergence,6,0.2942196394153998
+Xenium,15-16,Jensen-Shannon Divergence,7,0.3166558029547588
+Xenium,17-18,Cosine Distance,5,0.36140290152091026
+Xenium,17-18,Cosine Distance,6,0.31614818219026486
+Xenium,17-18,Jensen-Shannon Divergence,5,0.35328333632273684
+Xenium,17-18,Jensen-Shannon Divergence,6,0.3245588660063741
+Xenium,21-22,Cosine Distance,5,0.38748861503673027
+Xenium,21-22,Cosine Distance,7,0.3408671265240581
+Xenium,21-22,Jensen-Shannon Divergence,5,0.34477560232880966
+Xenium,21-22,Jensen-Shannon Divergence,7,0.3228789005030724
+Xenium,23-24,Cosine Distance,5,0.2945451337333691
+Xenium,23-24,Cosine Distance,7,0.3084050944351128
+Xenium,23-24,Jensen-Shannon Divergence,5,0.3044818589846387
+Xenium,23-24,Jensen-Shannon Divergence,7,0.317527741165246
+Xenium,27-28,Cosine Distance,5,0.3391643685973167
+Xenium,27-28,Cosine Distance,7,0.3224660156133533
+Xenium,27-28,Jensen-Shannon Divergence,5,0.33462345310087427
+Xenium,27-28,Jensen-Shannon Divergence,7,0.32773371567969967
+Xenium,29-30,Cosine Distance,5,0.25543284586459875
+Xenium,29-30,Cosine Distance,7,0.2782575784276024
+Xenium,29-30,Jensen-Shannon Divergence,5,0.3015470067115041
+Xenium,29-30,Jensen-Shannon Divergence,7,0.3097149197815031
+Xenium,31-32,Cosine Distance,5,0.3651974901559255
+Xenium,31-32,Cosine Distance,6,0.3156777022162942
+Xenium,31-32,Cosine Distance,7,0.36358931315458715
+Xenium,31-32,Jensen-Shannon Divergence,5,0.3416693625728232
+Xenium,31-32,Jensen-Shannon Divergence,6,0.31138261317907784
+Xenium,31-32,Jensen-Shannon Divergence,7,0.33708939573141306
+Xenium,33-34,Cosine Distance,5,0.2983982045214846
+Xenium,33-34,Cosine Distance,6,0.25630913359874247
+Xenium,33-34,Jensen-Shannon Divergence,5,0.30670042853432933
+Xenium,33-34,Jensen-Shannon Divergence,6,0.2907425292509961
+Xenium,39-40,Cosine Distance,5,0.3751295380649144
+Xenium,39-40,Cosine Distance,6,0.32961977965708056
+Xenium,39-40,Cosine Distance,7,0.33909266998602355
+Xenium,39-40,Jensen-Shannon Divergence,5,0.3455048467352669
+Xenium,39-40,Jensen-Shannon Divergence,6,0.32524790859062613
+Xenium,39-40,Jensen-Shannon Divergence,7,0.3384271814164599
+Xenium,41-42,Cosine Distance,5,0.3408367462043574
+Xenium,41-42,Cosine Distance,6,0.32359270142275937
+Xenium,41-42,Cosine Distance,7,0.3320733345391596
+Xenium,41-42,Jensen-Shannon Divergence,5,0.31429429119295715
+Xenium,41-42,Jensen-Shannon Divergence,6,0.297749260046099
+Xenium,41-42,Jensen-Shannon Divergence,7,0.31082340126572855
+Xenium,43-44,Cosine Distance,5,0.253744862737865
+Xenium,43-44,Cosine Distance,6,0.24524547274595018
+Xenium,43-44,Cosine Distance,7,0.27636006432395915
+Xenium,43-44,Jensen-Shannon Divergence,5,0.2897750102591285
+Xenium,43-44,Jensen-Shannon Divergence,6,0.27749809877053444
+Xenium,43-44,Jensen-Shannon Divergence,7,0.2958265294743284
+Xenium,7-8,Cosine Distance,5,0.3568249791189634
+Xenium,7-8,Cosine Distance,6,0.3386085000673127
+Xenium,7-8,Cosine Distance,7,0.3440228517576829
+Xenium,7-8,Jensen-Shannon Divergence,5,0.3378540523667515
+Xenium,7-8,Jensen-Shannon Divergence,6,0.3275262550127985
+Xenium,7-8,Jensen-Shannon Divergence,7,0.33931015237451295
+Xenium,9-10,Cosine Distance,5,0.3777460527312545
+Xenium,9-10,Cosine Distance,6,0.35743987919421727
+Xenium,9-10,Cosine Distance,7,0.36292250070540794
+Xenium,9-10,Jensen-Shannon Divergence,5,0.35309961630090336
+Xenium,9-10,Jensen-Shannon Divergence,6,0.3431762513380625
+Xenium,9-10,Jensen-Shannon Divergence,7,0.3468193522808022

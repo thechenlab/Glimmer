@@ -1,0 +1,49 @@
+Metric,Num_Clusters,Model_1,Model_2,KS_statistic,p_value,n1,n2
+Cosine Distance,5,Glimmer (Cell),Cellpose,1.0,5.341572174254904e-08,13,15
+Cosine Distance,5,Glimmer (Cell),Xenium,1.0,5.341572174254904e-08,13,15
+Cosine Distance,5,Glimmer (Cell),FICTURE (Hexagon),1.0,5.341572174254904e-08,13,15
+Cosine Distance,5,Glimmer (Bin),Cellpose,1.0,5.341572174254904e-08,13,15
+Cosine Distance,5,Glimmer (Bin),Xenium,1.0,5.341572174254904e-08,13,15
+Cosine Distance,5,Glimmer (Bin),FICTURE (Hexagon),1.0,5.341572174254904e-08,13,15
+Cosine Distance,5,Glimmer (Cell),Baysor (NCV),0.6,0.006077854482754199,13,15
+Cosine Distance,5,Glimmer (Bin),Baysor (NCV),0.6,0.006077854482754199,13,15
+Cosine Distance,6,Glimmer (Cell),FICTURE (Hexagon),1.0,1.1504924683010562e-07,12,15
+Cosine Distance,6,Glimmer (Bin),FICTURE (Hexagon),1.0,1.1504924683010562e-07,12,15
+Cosine Distance,6,Glimmer (Cell),Cellpose,1.0,7.396023010506791e-07,12,12
+Cosine Distance,6,Glimmer (Bin),Cellpose,1.0,7.396023010506791e-07,12,12
+Cosine Distance,6,Glimmer (Cell),Xenium,1.0,1.4792046021013582e-06,12,11
+Cosine Distance,6,Glimmer (Bin),Xenium,1.0,1.4792046021013582e-06,12,11
+Cosine Distance,6,Glimmer (Cell),Baysor (NCV),0.7166666666666667,0.0008269739862147992,12,15
+Cosine Distance,6,Glimmer (Bin),Baysor (NCV),0.5666666666666667,0.01703373128867812,12,15
+Cosine Distance,7,Glimmer (Cell),Cellpose,1.0,5.341572174254904e-08,13,15
+Cosine Distance,7,Glimmer (Cell),FICTURE (Hexagon),1.0,5.341572174254904e-08,13,15
+Cosine Distance,7,Glimmer (Bin),Cellpose,1.0,5.341572174254904e-08,13,15
+Cosine Distance,7,Glimmer (Bin),FICTURE (Hexagon),1.0,5.341572174254904e-08,13,15
+Cosine Distance,7,Glimmer (Cell),Xenium,1.0,3.845931965463531e-07,13,12
+Cosine Distance,7,Glimmer (Bin),Xenium,1.0,3.845931965463531e-07,13,12
+Cosine Distance,7,Glimmer (Cell),Baysor (NCV),0.8,4.36940603854051e-05,13,15
+Cosine Distance,7,Glimmer (Bin),Baysor (NCV),0.7333333333333333,0.00026579663139092403,13,15
+Jensen-Shannon Divergence,5,Glimmer (Cell),Cellpose,1.0,5.341572174254904e-08,13,15
+Jensen-Shannon Divergence,5,Glimmer (Cell),Xenium,1.0,5.341572174254904e-08,13,15
+Jensen-Shannon Divergence,5,Glimmer (Cell),FICTURE (Hexagon),1.0,5.341572174254904e-08,13,15
+Jensen-Shannon Divergence,5,Glimmer (Bin),Cellpose,1.0,5.341572174254904e-08,13,15
+Jensen-Shannon Divergence,5,Glimmer (Bin),Xenium,1.0,5.341572174254904e-08,13,15
+Jensen-Shannon Divergence,5,Glimmer (Bin),FICTURE (Hexagon),1.0,5.341572174254904e-08,13,15
+Jensen-Shannon Divergence,5,Glimmer (Cell),Baysor (NCV),0.5230769230769231,0.026465780820337292,13,15
+Jensen-Shannon Divergence,5,Glimmer (Bin),Baysor (NCV),0.38974358974358975,0.18319813814160296,13,15
+Jensen-Shannon Divergence,6,Glimmer (Cell),FICTURE (Hexagon),1.0,1.1504924683010562e-07,12,15
+Jensen-Shannon Divergence,6,Glimmer (Bin),FICTURE (Hexagon),1.0,1.1504924683010562e-07,12,15
+Jensen-Shannon Divergence,6,Glimmer (Cell),Cellpose,1.0,7.396023010506791e-07,12,12
+Jensen-Shannon Divergence,6,Glimmer (Bin),Cellpose,1.0,7.396023010506791e-07,12,12
+Jensen-Shannon Divergence,6,Glimmer (Cell),Xenium,1.0,1.4792046021013582e-06,12,11
+Jensen-Shannon Divergence,6,Glimmer (Bin),Xenium,1.0,1.4792046021013582e-06,12,11
+Jensen-Shannon Divergence,6,Glimmer (Cell),Baysor (NCV),0.6,0.009550928274848049,12,15
+Jensen-Shannon Divergence,6,Glimmer (Bin),Baysor (NCV),0.31666666666666665,0.4344680640548186,12,15
+Jensen-Shannon Divergence,7,Glimmer (Cell),Cellpose,1.0,5.341572174254904e-08,13,15
+Jensen-Shannon Divergence,7,Glimmer (Cell),FICTURE (Hexagon),1.0,5.341572174254904e-08,13,15
+Jensen-Shannon Divergence,7,Glimmer (Bin),Cellpose,1.0,5.341572174254904e-08,13,15
+Jensen-Shannon Divergence,7,Glimmer (Bin),FICTURE (Hexagon),1.0,5.341572174254904e-08,13,15
+Jensen-Shannon Divergence,7,Glimmer (Cell),Xenium,1.0,3.845931965463531e-07,13,12
+Jensen-Shannon Divergence,7,Glimmer (Bin),Xenium,1.0,3.845931965463531e-07,13,12
+Jensen-Shannon Divergence,7,Glimmer (Cell),Baysor (NCV),0.38461538461538464,0.19089432874599116,13,15
+Jensen-Shannon Divergence,7,Glimmer (Bin),Baysor (NCV),0.2512820512820513,0.6673268849874046,13,15
