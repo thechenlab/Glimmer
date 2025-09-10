@@ -46,7 +46,8 @@ weights = adata.obsp['neighbor_weights']
 ```
 
 ## 📚 Tutorial
-The detailed tutorial can be found [here](https://thechenlab.github.io/Glimmer/).
+The detailed tutorial can be found [here](https://thechenlab.github.io/Glimmer/). 
+(The documentation site is under construction; please refer to the tutorial notebooks for detailed steps for now.)
 
 📫 Contact
 Qiyu Gong
